@@ -201,7 +201,10 @@ module.exports = {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-//
+
+var _utils = __webpack_require__(15);
+
+var storage = weex.requireModule('storage'); //
 //
 //
 //
@@ -230,7 +233,6 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 
-var storage = weex.requireModule('storage');
 var navigator = weex.requireModule('navigator');
 exports.default = {
   data: function data() {
@@ -277,7 +279,7 @@ exports.default = {
       }
       storage.setItem('currentEvent', JSON.stringify(event));
       navigator.push({
-        url: './detail.html',
+        url: (0, _utils.getEntryUrl)('detail'),
         animated: 'true'
       });
     },
@@ -294,7 +296,7 @@ exports.default = {
         this.onHidden();
       }
       navigator.push({
-        url: './add.html',
+        url: (0, _utils.getEntryUrl)('add'),
         animated: 'true'
       });
     },
@@ -381,6 +383,29 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v("")])])
 }]}
 module.exports.render._withStripped = true
+
+/***/ }),
+/* 15 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.getEntryUrl = getEntryUrl;
+function getEntryUrl(pageName) {
+  if (weex.config.env.platform === 'Web') {
+    return './' + pageName + '.html';
+  } else {
+    var arr = weex.config.bundleUrl.split('/');
+    // 防止为 .html
+    arr.pop();
+    arr.push(pageName + '.js');
+    return arr.join('/');
+  }
+}
 
 /***/ })
 /******/ ]);

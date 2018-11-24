@@ -27,6 +27,7 @@
 </template>
 
 <script>
+import { getEntryUrl } from './utils'
 const storage = weex.requireModule('storage')
 const navigator = weex.requireModule('navigator')
 export default {
@@ -71,7 +72,7 @@ export default {
       }
       storage.setItem('currentEvent', JSON.stringify(event))
       navigator.push({
-        url: './detail.html',
+        url: getEntryUrl('detail'),
         animated: 'true'
       })
     },
@@ -88,7 +89,7 @@ export default {
         this.onHidden()
       }
       navigator.push({
-        url: './add.html',
+        url: getEntryUrl('add'),
         animated: 'true'
       })
     },
