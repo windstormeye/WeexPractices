@@ -1,21 +1,17 @@
 <template>
-  <div class="wrp" @viewappear="OnShow" @viewdisappear="OnHidden">
+  <div class="wrp" @viewappear="onShow" @viewdisappear="onHidden">
     <navbar title="待办清单" :show-back="false"></navbar>
     <text class="title" v-if="todoEvents.length > 0">代办事项</text>
-    <div class="event-wrp">
-      <eventItem v-for="(event, index ) in todoEvents"
+    <eventItem v-for="(event, index ) in todoEvents"
        :key="event.name" :event="event" :index="index"
        @click="onEventClick(event)"
        @onClickFinishButton="onFinish">
       </eventItem>
-    </div>
     <text class="title" v-if="doneEvents.length > 0">已办事项</text>
-    <div class="event-wrp">
-      <eventItem v-for="(event, index ) in doneEvents"
+    <eventItem v-for="(event, index ) in doneEvents"
        :key="event.name" :event="event" :index="index" :showFinishButton="false"
        @click="onEventClick(event)">
       </eventItem>
-    </div>
     <tab-bar @onAdd="onAdd" @onClear="onClear"></tab-bar>
   </div>
 </template>
@@ -87,7 +83,6 @@ export default {
     onClear () {
       this.todoEvents = []
       this.doneEvents = []
-      this.onHidden()
     }
   }
 }

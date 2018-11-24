@@ -2,7 +2,7 @@
   <div class="event">
     <text class="label">{{ event.name }}</text>
     <div class="event-btn-wrp">
-      <text class="btn" @click="onFinish(event, index)">完成</text>
+      <text v-if="showFinishButton" class="btn" @click="onFinish(event, index)">完成</text>
       <text class="iconfont">&#xe775;</text>
     </div>
   </div>
