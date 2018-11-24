@@ -1,10 +1,6 @@
 <template>
   <div class="wrp">
-    <div class="navbar">
-      <text class="iconfont navbar-icon" @click="onBack">&#xe779;</text>
-      <text class="navbar-title">添加事件</text>
-      <text class="navbar-title"></text>
-    </div>
+    <navbar title="添加待办"></navbar>
     <div class="form-item">
       <input v-model="eventName" type="text" class="input" placeholder="请输入事件名称" />
     </div>
@@ -18,11 +14,13 @@
 </template>
 
 <script>
+import navbar from './components/navbar.vue'
 const storage = weex.requireModule('storage')
 const navigator = weex.requireModule('navigator')
 
 export default {
   name: 'add',
+  components: { navbar },
   data () {
     return {
       eventName: '',

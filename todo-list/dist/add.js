@@ -201,11 +201,14 @@ module.exports = {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-//
-//
-//
-//
-//
+
+var _navbar = __webpack_require__(6);
+
+var _navbar2 = _interopRequireDefault(_navbar);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var storage = weex.requireModule('storage'); //
 //
 //
 //
@@ -221,11 +224,11 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 
-var storage = weex.requireModule('storage');
 var navigator = weex.requireModule('navigator');
 
 exports.default = {
   name: 'add',
+  components: { navbar: _navbar2.default },
   data: function data() {
     return {
       eventName: '',
@@ -279,18 +282,11 @@ exports.default = {
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: ["wrp"]
-  }, [_c('div', {
-    staticClass: ["navbar"]
-  }, [_c('text', {
-    staticClass: ["iconfont", "navbar-icon"],
-    on: {
-      "click": _vm.onBack
+  }, [_c('navbar', {
+    attrs: {
+      "title": "添加待办"
     }
-  }, [_vm._v("")]), _c('text', {
-    staticClass: ["navbar-title"]
-  }, [_vm._v("添加事件")]), _c('text', {
-    staticClass: ["navbar-title"]
-  })]), _c('div', {
+  }), _c('div', {
     staticClass: ["form-item"]
   }, [_c('input', {
     staticClass: ["input"],
@@ -325,7 +321,162 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": _vm.onAdd
     }
-  }, [_vm._v("完成")])])])
+  }, [_vm._v("完成")])])], 1)
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+
+/***/ }),
+/* 5 */,
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __vue_exports__, __vue_options__
+var __vue_styles__ = []
+
+/* styles */
+__vue_styles__.push(__webpack_require__(18)
+)
+
+/* script */
+__vue_exports__ = __webpack_require__(19)
+
+/* template */
+var __vue_template__ = __webpack_require__(20)
+__vue_options__ = __vue_exports__ = __vue_exports__ || {}
+if (
+  typeof __vue_exports__.default === "object" ||
+  typeof __vue_exports__.default === "function"
+) {
+if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
+__vue_options__ = __vue_exports__ = __vue_exports__.default
+}
+if (typeof __vue_options__ === "function") {
+  __vue_options__ = __vue_options__.options
+}
+__vue_options__.__file = "/Users/pjhubs/Documents/project/case/Weex/todo-list/src/components/navbar.vue"
+__vue_options__.render = __vue_template__.render
+__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
+__vue_options__._scopeId = "data-v-688b5e20"
+__vue_options__.style = __vue_options__.style || {}
+__vue_styles__.forEach(function (module) {
+  for (var name in module) {
+    __vue_options__.style[name] = module[name]
+  }
+})
+if (typeof __register_static_styles__ === "function") {
+  __register_static_styles__(__vue_options__._scopeId, __vue_styles__)
+}
+
+module.exports = __vue_exports__
+
+
+/***/ }),
+/* 7 */,
+/* 8 */,
+/* 9 */,
+/* 10 */,
+/* 11 */,
+/* 12 */,
+/* 13 */,
+/* 14 */,
+/* 15 */,
+/* 16 */,
+/* 17 */,
+/* 18 */
+/***/ (function(module, exports) {
+
+module.exports = {
+  "iconfont": {
+    "fontFamily": "iconfont"
+  },
+  "navbar": {
+    "height": "88",
+    "backgroundColor": "#50e3a4",
+    "flexDirection": "row",
+    "justifyContent": "space-between",
+    "alignItems": "center",
+    "paddingLeft": "20",
+    "paddingRight": "20"
+  },
+  "navbar-title": {
+    "fontSize": "32",
+    "color": "#ffffff"
+  },
+  "navbar-icon": {
+    "color": "#ffffff",
+    "fontSize": "36"
+  }
+}
+
+/***/ }),
+/* 19 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+var navigator = weex.requireModule('navigator');
+exports.default = {
+  name: 'navbar',
+  props: {
+    showBack: {
+      type: Boolean,
+      default: true
+    },
+    title: {
+      type: String,
+      required: true
+    }
+  },
+  beforeCreate: function beforeCreate() {
+    var domModule = weex.requireModule('dom');
+    domModule.addRule('fontFace', {
+      'fontFamily': 'iconfont',
+      'src': "url('http://at.alicdn.com/t/font_933576_ji32n9fdyki.ttf')"
+    });
+  },
+
+  methods: {
+    onBack: function onBack() {
+      navigator.pop({
+        animated: 'true'
+      });
+    }
+  }
+};
+
+/***/ }),
+/* 20 */
+/***/ (function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: ["navbar"]
+  }, [(_vm.showBack) ? _c('text', {
+    staticClass: ["iconfont", "navbar-icon"],
+    on: {
+      "click": _vm.onBack
+    }
+  }, [_vm._v("")]) : _c('text', {
+    staticClass: ["navbar-title"]
+  }), _c('text', {
+    staticClass: ["navbar-title"]
+  }, [_vm._v(_vm._s(_vm.title))]), _c('text', {
+    staticClass: ["navbar-title"]
+  })])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 
