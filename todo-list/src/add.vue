@@ -1,33 +1,70 @@
 <template>
   <div class="wrp">
     <div class="nav-bar">
-      <text class="iconfont">&#xe600;</text>
+      <text class="iconfont" @click="onBack">&#xe600;</text>
       <text class="title">添加事件</text>
       <text class="title"></text>
     </div>
     <div class="form-item">
       <text>事件名称</text>
-      <input type="text" class="input" placeholder="请输入事件名称" />
+      <input v-model="eventName" type="text" class="input" placeholder="请输入事件名称" />
     </div>
     <div class="form-item">
       <text>事件详情</text>
-      <textarea type="text" class="textarea" placeholder="请输入事件内容" />
+      <textarea v-model="eventDesc" type="text" class="textarea" placeholder="请输入事件内容" />
     </div>
     <div class="bottom-btn-wrp">
-      <text class="bottom-btn">添加</text>
+      <text class="bottom-btn" @click="onAdd">完成</text>
     </div>
   </div>
 </template>
 
 <script>
+const storage = weex.requireModule('storage')
+const navigator = weex.requireModule('navigator')
+
 export default {
   name: 'add',
+  data () {
+    return {
+      eventName: '',
+      eventDesc: ''
+    }
+  },
   beforeCreate () {
     const domModule = weex.requireModule('dom')
     domModule.addRule('fontFace', {
       'fontFamily': 'iconfont',
       'src': "url('http://at.alicdn.com/t/font_933576_hjux2fbay07.ttf')"
     })
+  },
+  methods: {
+    onBack () {
+      navigator.pop({
+        animated: 'true'
+      })
+    },
+    onAdd () {
+      var todoEvents
+      storage.getItem('todoEvents', e => {
+        if (e.result === 'success') {
+          todoEvents = JSON.parse(e.data)
+        } else {
+          todoEvents = []
+        }
+        todoEvents.push({
+          name: this.eventName,
+          eventDesc: this.eventDesc
+        })
+        storage.setItem('todoEvents', JSON.stringify(todoEvents), e => {
+          if (e.result === 'success') {
+            navigator.pop({
+              animated: 'ture'
+            })
+          }
+        })
+      })
+    }
   }
 }
 

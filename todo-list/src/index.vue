@@ -1,8 +1,8 @@
 <template>
-  <div class="wrp">
+  <div class="wrp" @viewappear="OnShow" @viewdisappear="OnHidden">
     <text class="title">代办事项</text>
     <div class="event-wrp">
-      <div class="event" v-for="(event, index) in todoEvents" :key="event.name">
+      <div class="event" v-for="(event, index) in todoEvents" :key="event.name" @click="onEventClick(event)">
         <text class="label">{{ event.name }}</text>
         <div class="event-btn-wrp">
           <text class="btn" @click="onFinish(event, index)">完成</text>
@@ -12,7 +12,7 @@
     </div>
     <text class="title">已办事项</text>
     <div class="event-wrp">
-      <div class="event" v-for="event in doneEvents" :key="event.name">
+      <div class="event" v-for="event in doneEvents" :key="event.name" @click="onEventClick(event)">
         <text class="label">{{ event.name }}</text>
         <div class="event-btn-wrp">
           <text class="iconfont">&#xe601;</text>
@@ -20,22 +20,19 @@
       </div>
     </div>
     <div class="bottom-btn-wrp">
-      <text class="bottom-btn">添加</text>
-      <text class="bottom-btn">清空</text>
+      <text class="bottom-btn" @click="onAdd">添加</text>
+      <text class="bottom-btn" @click="onClear">清空</text>
     </div>
   </div>
 </template>
 
 <script>
+const storage = weex.requireModule('storage')
+const navigator = weex.requireModule('navigator')
 export default {
   data () {
     return {
-      todoEvents: [
-        {
-          name: '11：30 定外卖！',
-          desc: '好的好的！'
-        }
-      ],
+      todoEvents: [],
       doneEvents: []
     }
   },
@@ -46,10 +43,59 @@ export default {
       'src': "url('http://at.alicdn.com/t/font_933576_hjux2fbay07.ttf')"
     })
   },
+  created () {
+    if (weex.config.env.platform === 'Web') {
+      this.onShow()
+    }
+  },
   methods: {
+    onShow () {
+      storage.getItem('todoEvents', e => {
+        if (e.result === 'success') {
+          this.todoEvents = JSON.parse(e.data)
+        } else {
+          this.todoEvents = []
+        }
+      })
+      storage.getItem('doneEvents', e => {
+        if (e.result === 'success') {
+          this.doneEvents = JSON.parse(e.data)
+        } else {
+          this.doneEvents = []
+        }
+      })
+    },
+    onEventClick (event) {
+      if (weex.config.env.platform === 'Web') {
+        this.onHidden()
+      }
+      storage.setItem('currentEvent', JSON.stringify(event))
+      navigator.push({
+        url: './detail.html',
+        animated: 'true'
+      })
+    },
+    onHidden () {
+      storage.setItem('todoEvents', JSON.stringify(this.todoEvents))
+      storage.setItem('doneEvents', JSON.stringify(this.doneEvents))
+    },
     onFinish (event, index) {
       this.todoEvents.splice(index, 1)
       this.doneEvents.push(event)
+    },
+    onAdd () {
+      if (weex.config.env.platform === 'Web') {
+        this.onHidden()
+      }
+      navigator.push({
+        url: './add.html',
+        animated: 'true'
+      })
+    },
+    onClear () {
+      this.todoEvents = []
+      this.doneEvents = []
+      this.onHidden()
     }
   }
 }

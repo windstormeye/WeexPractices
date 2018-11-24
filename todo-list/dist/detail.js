@@ -188,14 +188,42 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 
+var storage = weex.requireModule('storage');
+var navigator = weex.requireModule('navigator');
 exports.default = {
   name: 'detail',
+  data: function data() {
+    return {
+      eventName: '',
+      eventDesc: ''
+    };
+  },
   beforeCreate: function beforeCreate() {
     var domModule = weex.requireModule('dom');
     domModule.addRule('fontFace', {
       'fontFamily': 'iconfont',
       'src': "url('http://at.alicdn.com/t/font_933576_hjux2fbay07.ttf')"
     });
+  },
+  created: function created() {
+    var _this = this;
+
+    storage.getItem('currentEvent', function (e) {
+      // debugger
+      if (e.result === 'success') {
+        var event = JSON.parse(e.data);
+        _this.eventName = event.name;
+        _this.eventDesc = event.eventDesc;
+      }
+    });
+  },
+
+  methods: {
+    onBack: function onBack() {
+      navigator.pop({
+        animated: 'true'
+      });
+    }
   }
 };
 
@@ -204,24 +232,25 @@ exports.default = {
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _vm._m(0)
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: ["wrp"]
   }, [_c('div', {
     staticClass: ["nav-bar"]
   }, [_c('text', {
-    staticClass: ["iconfont"]
+    staticClass: ["iconfont"],
+    on: {
+      "click": _vm.onBack
+    }
   }, [_vm._v("")]), _c('text', {
     staticClass: ["title"]
   }, [_vm._v("事件详情")]), _c('text', {
     staticClass: ["title"]
   })]), _c('div', {
     staticClass: ["form-item"]
-  }, [_c('text', [_vm._v("事件名称：")]), _c('text', [_vm._v("事件名称")])]), _c('div', {
+  }, [_c('text', [_vm._v("事件名称：")]), _c('text', [_vm._v(_vm._s(_vm.eventName))])]), _c('div', {
     staticClass: ["form-item"]
-  }, [_c('text', [_vm._v("事件详情：")]), _c('text', [_vm._v("事件详情")])])])
-}]}
+  }, [_c('text', [_vm._v("事件详情：")]), _c('text', [_vm._v(_vm._s(_vm.eventDesc))])])])
+},staticRenderFns: []}
 module.exports.render._withStripped = true
 
 /***/ })

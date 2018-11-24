@@ -206,14 +206,54 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 
+var storage = weex.requireModule('storage');
+var navigator = weex.requireModule('navigator');
+
 exports.default = {
   name: 'add',
+  data: function data() {
+    return {
+      eventName: '',
+      eventDesc: ''
+    };
+  },
   beforeCreate: function beforeCreate() {
     var domModule = weex.requireModule('dom');
     domModule.addRule('fontFace', {
       'fontFamily': 'iconfont',
       'src': "url('http://at.alicdn.com/t/font_933576_hjux2fbay07.ttf')"
     });
+  },
+
+  methods: {
+    onBack: function onBack() {
+      navigator.pop({
+        animated: 'true'
+      });
+    },
+    onAdd: function onAdd() {
+      var _this = this;
+
+      var todoEvents;
+      storage.getItem('todoEvents', function (e) {
+        if (e.result === 'success') {
+          todoEvents = JSON.parse(e.data);
+        } else {
+          todoEvents = [];
+        }
+        todoEvents.push({
+          name: _this.eventName,
+          eventDesc: _this.eventDesc
+        });
+        storage.setItem('todoEvents', JSON.stringify(todoEvents), function (e) {
+          if (e.result === 'success') {
+            navigator.pop({
+              animated: 'ture'
+            });
+          }
+        });
+      });
+    }
   }
 };
 
@@ -222,14 +262,15 @@ exports.default = {
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _vm._m(0)
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: ["wrp"]
   }, [_c('div', {
     staticClass: ["nav-bar"]
   }, [_c('text', {
-    staticClass: ["iconfont"]
+    staticClass: ["iconfont"],
+    on: {
+      "click": _vm.onBack
+    }
   }, [_vm._v("")]), _c('text', {
     staticClass: ["title"]
   }, [_vm._v("添加事件")]), _c('text', {
@@ -240,7 +281,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: ["input"],
     attrs: {
       "type": "text",
-      "placeholder": "请输入事件名称"
+      "placeholder": "请输入事件名称",
+      "value": (_vm.eventName)
+    },
+    on: {
+      "input": function($event) {
+        _vm.eventName = $event.target.attr.value
+      }
     }
   })]), _c('div', {
     staticClass: ["form-item"]
@@ -248,14 +295,23 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: ["textarea"],
     attrs: {
       "type": "text",
-      "placeholder": "请输入事件内容"
+      "placeholder": "请输入事件内容",
+      "value": (_vm.eventDesc)
+    },
+    on: {
+      "input": function($event) {
+        _vm.eventDesc = $event.target.attr.value
+      }
     }
   })]), _c('div', {
     staticClass: ["bottom-btn-wrp"]
   }, [_c('text', {
-    staticClass: ["bottom-btn"]
-  }, [_vm._v("添加")])])])
-}]}
+    staticClass: ["bottom-btn"],
+    on: {
+      "click": _vm.onAdd
+    }
+  }, [_vm._v("完成")])])])
+},staticRenderFns: []}
 module.exports.render._withStripped = true
 
 /***/ })

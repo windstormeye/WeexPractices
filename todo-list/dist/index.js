@@ -230,13 +230,12 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 
+var storage = weex.requireModule('storage');
+var navigator = weex.requireModule('navigator');
 exports.default = {
   data: function data() {
     return {
-      todoEvents: [{
-        name: '11：30 定外卖！',
-        desc: '好的好的！'
-      }],
+      todoEvents: [],
       doneEvents: []
     };
   },
@@ -247,11 +246,62 @@ exports.default = {
       'src': "url('http://at.alicdn.com/t/font_933576_hjux2fbay07.ttf')"
     });
   },
+  created: function created() {
+    if (weex.config.env.platform === 'Web') {
+      this.onShow();
+    }
+  },
 
   methods: {
+    onShow: function onShow() {
+      var _this = this;
+
+      storage.getItem('todoEvents', function (e) {
+        if (e.result === 'success') {
+          _this.todoEvents = JSON.parse(e.data);
+        } else {
+          _this.todoEvents = [];
+        }
+      });
+      storage.getItem('doneEvents', function (e) {
+        if (e.result === 'success') {
+          _this.doneEvents = JSON.parse(e.data);
+        } else {
+          _this.doneEvents = [];
+        }
+      });
+    },
+    onEventClick: function onEventClick(event) {
+      if (weex.config.env.platform === 'Web') {
+        this.onHidden();
+      }
+      storage.setItem('currentEvent', JSON.stringify(event));
+      navigator.push({
+        url: './detail.html',
+        animated: 'true'
+      });
+    },
+    onHidden: function onHidden() {
+      storage.setItem('todoEvents', JSON.stringify(this.todoEvents));
+      storage.setItem('doneEvents', JSON.stringify(this.doneEvents));
+    },
     onFinish: function onFinish(event, index) {
       this.todoEvents.splice(index, 1);
       this.doneEvents.push(event);
+    },
+    onAdd: function onAdd() {
+      if (weex.config.env.platform === 'Web') {
+        this.onHidden();
+      }
+      navigator.push({
+        url: './add.html',
+        animated: 'true'
+      });
+    },
+    onClear: function onClear() {
+      this.todoEvents = [];
+      this.doneEvents = [];
+      this.onHidden();
     }
   }
 };
@@ -262,7 +312,11 @@ exports.default = {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: ["wrp"]
+    staticClass: ["wrp"],
+    on: {
+      "viewappear": _vm.OnShow,
+      "viewdisappear": _vm.OnHidden
+    }
   }, [_c('text', {
     staticClass: ["title"]
   }, [_vm._v("代办事项")]), _c('div', {
@@ -270,7 +324,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, _vm._l((_vm.todoEvents), function(event, index) {
     return _c('div', {
       key: event.name,
-      staticClass: ["event"]
+      staticClass: ["event"],
+      on: {
+        "click": function($event) {
+          _vm.onEventClick(event)
+        }
+      }
     }, [_c('text', {
       staticClass: ["label"]
     }, [_vm._v(_vm._s(event.name))]), _c('div', {
@@ -292,25 +351,34 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, _vm._l((_vm.doneEvents), function(event) {
     return _c('div', {
       key: event.name,
-      staticClass: ["event"]
+      staticClass: ["event"],
+      on: {
+        "click": function($event) {
+          _vm.onEventClick(event)
+        }
+      }
     }, [_c('text', {
       staticClass: ["label"]
     }, [_vm._v(_vm._s(event.name))]), _vm._m(0, true)])
-  })), _vm._m(1)])
+  })), _c('div', {
+    staticClass: ["bottom-btn-wrp"]
+  }, [_c('text', {
+    staticClass: ["bottom-btn"],
+    on: {
+      "click": _vm.onAdd
+    }
+  }, [_vm._v("添加")]), _c('text', {
+    staticClass: ["bottom-btn"],
+    on: {
+      "click": _vm.onClear
+    }
+  }, [_vm._v("清空")])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: ["event-btn-wrp"]
   }, [_c('text', {
     staticClass: ["iconfont"]
   }, [_vm._v("")])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: ["bottom-btn-wrp"]
-  }, [_c('text', {
-    staticClass: ["bottom-btn"]
-  }, [_vm._v("添加")]), _c('text', {
-    staticClass: ["bottom-btn"]
-  }, [_vm._v("清空")])])
 }]}
 module.exports.render._withStripped = true
 
