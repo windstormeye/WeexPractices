@@ -2,18 +2,18 @@
   <div class="wrp">
     <text class="title">代办事项</text>
     <div class="event-wrp">
-      <div class="event">
-        <text class="label">Label</text>
+      <div class="event" v-for="(event, index) in todoEvents" :key="event.name">
+        <text class="label">{{ event.name }}</text>
         <div class="event-btn-wrp">
-          <text class="btn">完成</text>
+          <text class="btn" @click="onFinish(event, index)">完成</text>
           <text class="iconfont">&#xe601;</text>
         </div>
       </div>
     </div>
     <text class="title">已办事项</text>
     <div class="event-wrp">
-      <div class="event">
-        <text class="label">Label</text>
+      <div class="event" v-for="event in doneEvents" :key="event.name">
+        <text class="label">{{ event.name }}</text>
         <div class="event-btn-wrp">
           <text class="iconfont">&#xe601;</text>
         </div>
@@ -28,10 +28,15 @@
 
 <script>
 export default {
-  name: 'App',
   data () {
     return {
-      logo: 'https://gw.alicdn.com/tfs/TB1yopEdgoQMeJjy1XaXXcSsFXa-640-302.png'
+      todoEvents: [
+        {
+          name: '11：30 定外卖！',
+          desc: '好的好的！'
+        }
+      ],
+      doneEvents: []
     }
   },
   beforeCreate () {
@@ -40,6 +45,12 @@ export default {
       'fontFamily': 'iconfont',
       'src': "url('http://at.alicdn.com/t/font_933576_hjux2fbay07.ttf')"
     })
+  },
+  methods: {
+    onFinish (event, index) {
+      this.todoEvents.splice(index, 1)
+      this.doneEvents.push(event)
+    }
   }
 }
 </script>

@@ -231,10 +231,13 @@ Object.defineProperty(exports, "__esModule", {
 //
 
 exports.default = {
-  name: 'App',
   data: function data() {
     return {
-      logo: 'https://gw.alicdn.com/tfs/TB1yopEdgoQMeJjy1XaXXcSsFXa-640-302.png'
+      todoEvents: [{
+        name: '11：30 定外卖！',
+        desc: '好的好的！'
+      }],
+      doneEvents: []
     };
   },
   beforeCreate: function beforeCreate() {
@@ -243,6 +246,13 @@ exports.default = {
       'fontFamily': 'iconfont',
       'src': "url('http://at.alicdn.com/t/font_933576_hjux2fbay07.ttf')"
     });
+  },
+
+  methods: {
+    onFinish: function onFinish(event, index) {
+      this.todoEvents.splice(index, 1);
+      this.doneEvents.push(event);
+    }
   }
 };
 
@@ -251,43 +261,56 @@ exports.default = {
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _vm._m(0)
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: ["wrp"]
   }, [_c('text', {
     staticClass: ["title"]
   }, [_vm._v("代办事项")]), _c('div', {
     staticClass: ["event-wrp"]
-  }, [_c('div', {
-    staticClass: ["event"]
-  }, [_c('text', {
-    staticClass: ["label"]
-  }, [_vm._v("Label")]), _c('div', {
-    staticClass: ["event-btn-wrp"]
-  }, [_c('text', {
-    staticClass: ["btn"]
-  }, [_vm._v("完成")]), _c('text', {
-    staticClass: ["iconfont"]
-  }, [_vm._v("")])])])]), _c('text', {
+  }, _vm._l((_vm.todoEvents), function(event, index) {
+    return _c('div', {
+      key: event.name,
+      staticClass: ["event"]
+    }, [_c('text', {
+      staticClass: ["label"]
+    }, [_vm._v(_vm._s(event.name))]), _c('div', {
+      staticClass: ["event-btn-wrp"]
+    }, [_c('text', {
+      staticClass: ["btn"],
+      on: {
+        "click": function($event) {
+          _vm.onFinish(event, index)
+        }
+      }
+    }, [_vm._v("完成")]), _c('text', {
+      staticClass: ["iconfont"]
+    }, [_vm._v("")])])])
+  })), _c('text', {
     staticClass: ["title"]
   }, [_vm._v("已办事项")]), _c('div', {
     staticClass: ["event-wrp"]
-  }, [_c('div', {
-    staticClass: ["event"]
-  }, [_c('text', {
-    staticClass: ["label"]
-  }, [_vm._v("Label")]), _c('div', {
+  }, _vm._l((_vm.doneEvents), function(event) {
+    return _c('div', {
+      key: event.name,
+      staticClass: ["event"]
+    }, [_c('text', {
+      staticClass: ["label"]
+    }, [_vm._v(_vm._s(event.name))]), _vm._m(0, true)])
+  })), _vm._m(1)])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
     staticClass: ["event-btn-wrp"]
   }, [_c('text', {
     staticClass: ["iconfont"]
-  }, [_vm._v("")])])])]), _c('div', {
+  }, [_vm._v("")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
     staticClass: ["bottom-btn-wrp"]
   }, [_c('text', {
     staticClass: ["bottom-btn"]
   }, [_vm._v("添加")]), _c('text', {
     staticClass: ["bottom-btn"]
-  }, [_vm._v("清空")])])])
+  }, [_vm._v("清空")])])
 }]}
 module.exports.render._withStripped = true
 
