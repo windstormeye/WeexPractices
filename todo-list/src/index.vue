@@ -1,18 +1,34 @@
 <template>
-  <div class="wrapper">
-    <image :src="logo" class="logo" />
-    <text class="iconfont">&#xe600;</text>
-    <HelloWorld/>
+  <div class="wrp">
+    <text class="title">代办事项</text>
+    <div class="event-wrp">
+      <div class="event">
+        <text class="label">Label</text>
+        <div class="event-btn-wrp">
+          <text class="btn">完成</text>
+          <text class="iconfont">&#xe601;</text>
+        </div>
+      </div>
+    </div>
+    <text class="title">已办事项</text>
+    <div class="event-wrp">
+      <div class="event">
+        <text class="label">Label</text>
+        <div class="event-btn-wrp">
+          <text class="iconfont">&#xe601;</text>
+        </div>
+      </div>
+    </div>
+    <div class="bottom-btn-wrp">
+      <text class="bottom-btn">添加</text>
+      <text class="bottom-btn">清空</text>
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld'
 export default {
   name: 'App',
-  components: {
-    HelloWorld
-  },
   data () {
     return {
       logo: 'https://gw.alicdn.com/tfs/TB1yopEdgoQMeJjy1XaXXcSsFXa-640-302.png'
@@ -32,23 +48,53 @@ export default {
   .iconfont {
     font-family: iconfont;
   }
-  .wrapper {
-    justify-content: center;
+  .wrp {
+    background-color: #f0f0f2;
+  }
+  .title {
+    font-size: 30px;
+    padding-top: 20px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .event {
+    background-color: #fff;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 20px;
+    padding-right: 20px;
+    height: 80px;
+  }
+  .event-btn-wrp {
+    flex-direction: row;
     align-items: center;
   }
-  .logo {
-    width: 424px;
-    height: 200px;
+  .btn {
+    border-width: 2px;
+    border-radius: 10px;
+    font-size: 28px;
+    padding-left: 18px;
+    padding-right: 18px;
+    padding-top: 2px;
+    padding-bottom: 2px;
   }
-  .greeting {
+  .bottom-btn-wrp {
+    bottom: 0px;
+    left: 0px;
+    position: absolute;
+    width: 100%;
+    height: 100px;
+    background-color: #FFF;
+    /* 主轴方向 */
+    flex-direction: row;
+    /* 水平方向 */
+    align-items: center;
+  }
+  .bottom-btn {
+    flex: 1;
     text-align: center;
-    margin-top: 70px;
-    font-size: 50px;
-    color: #41B883;
   }
-  .message {
-    margin: 30px;
-    font-size: 32px;
-    color: #727272;
-  }
+
 </style>
