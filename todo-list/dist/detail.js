@@ -62,7 +62,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 5);
+/******/ 	return __webpack_require__(__webpack_require__.s = 7);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -71,13 +71,15 @@
 /* 2 */,
 /* 3 */,
 /* 4 */,
-/* 5 */
+/* 5 */,
+/* 6 */,
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _detail = __webpack_require__(6);
+var _detail = __webpack_require__(8);
 
 var _detail2 = _interopRequireDefault(_detail);
 
@@ -87,21 +89,21 @@ _detail2.default.el = '#root';
 new Vue(_detail2.default);
 
 /***/ }),
-/* 6 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __vue_exports__, __vue_options__
 var __vue_styles__ = []
 
 /* styles */
-__vue_styles__.push(__webpack_require__(7)
+__vue_styles__.push(__webpack_require__(9)
 )
 
 /* script */
-__vue_exports__ = __webpack_require__(8)
+__vue_exports__ = __webpack_require__(10)
 
 /* template */
-var __vue_template__ = __webpack_require__(9)
+var __vue_template__ = __webpack_require__(11)
 __vue_options__ = __vue_exports__ = __vue_exports__ || {}
 if (
   typeof __vue_exports__.default === "object" ||
@@ -131,7 +133,7 @@ module.exports = __vue_exports__
 
 
 /***/ }),
-/* 7 */
+/* 9 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -140,27 +142,43 @@ module.exports = {
   },
   "wrp": {
     "flexDirection": "column",
-    "backgroundColor": "#F0F0F2"
+    "backgroundColor": "#f0efe9"
   },
-  "nav-bar": {
+  "navbar": {
     "height": "88",
-    "backgroundColor": "#FFFFFF",
+    "backgroundColor": "#50e3a4",
     "flexDirection": "row",
     "justifyContent": "space-between",
     "alignItems": "center",
     "paddingLeft": "20",
     "paddingRight": "20"
   },
+  "navbar-title": {
+    "fontSize": "32",
+    "color": "#ffffff"
+  },
+  "navbar-icon": {
+    "color": "#ffffff",
+    "fontSize": "36"
+  },
   "form-item": {
     "flexDirection": "row",
-    "paddingLeft": "20",
-    "paddingRight": "20",
-    "marginTop": "40"
+    "paddingLeft": "30",
+    "paddingRight": "30",
+    "marginTop": "30"
+  },
+  "title-text": {
+    "fontSize": "28",
+    "color": "#3e434f"
+  },
+  "text": {
+    "fontSize": "26",
+    "color": "#3e434f"
   }
 }
 
 /***/ }),
-/* 8 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -169,8 +187,6 @@ module.exports = {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-//
-//
 //
 //
 //
@@ -202,7 +218,7 @@ exports.default = {
     var domModule = weex.requireModule('dom');
     domModule.addRule('fontFace', {
       'fontFamily': 'iconfont',
-      'src': "url('http://at.alicdn.com/t/font_933576_hjux2fbay07.ttf')"
+      'src': "url('http://at.alicdn.com/t/font_933576_ji32n9fdyki.ttf')"
     });
   },
   created: function created() {
@@ -228,28 +244,32 @@ exports.default = {
 };
 
 /***/ }),
-/* 9 */
+/* 11 */
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: ["wrp"]
   }, [_c('div', {
-    staticClass: ["nav-bar"]
+    staticClass: ["navbar"]
   }, [_c('text', {
-    staticClass: ["iconfont"],
+    staticClass: ["iconfont", "navbar-icon"],
     on: {
       "click": _vm.onBack
     }
-  }, [_vm._v("")]), _c('text', {
-    staticClass: ["title"]
+  }, [_vm._v("")]), _c('text', {
+    staticClass: ["navbar-title"]
   }, [_vm._v("事件详情")]), _c('text', {
-    staticClass: ["title"]
+    staticClass: ["navbar-title"]
   })]), _c('div', {
     staticClass: ["form-item"]
-  }, [_c('text', [_vm._v("事件名称：")]), _c('text', [_vm._v(_vm._s(_vm.eventName))])]), _c('div', {
+  }, [_c('text', {
+    staticClass: ["title-text"]
+  }, [_vm._v(_vm._s(_vm.eventName))])]), _c('div', {
     staticClass: ["form-item"]
-  }, [_c('text', [_vm._v("事件详情：")]), _c('text', [_vm._v(_vm._s(_vm.eventDesc))])])])
+  }, [_c('text', {
+    staticClass: ["title-text"]
+  }, [_vm._v(_vm._s(_vm.eventDesc))])])])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 

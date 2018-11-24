@@ -1,17 +1,15 @@
 <template>
   <div class="wrp">
-    <div class="nav-bar">
-      <text class="iconfont" @click="onBack">&#xe600;</text>
-      <text class="title">事件详情</text>
-      <text class="title"></text>
+    <div class="navbar">
+      <text class="iconfont navbar-icon" @click="onBack">&#xe779;</text>
+      <text class="navbar-title">事件详情</text>
+      <text class="navbar-title"></text>
     </div>
     <div class="form-item">
-      <text>事件名称：</text>
-      <text>{{ eventName }}</text>
+      <text class="title-text">{{ eventName }}</text>
     </div>
     <div class="form-item">
-      <text>事件详情：</text>
-      <text>{{ eventDesc }}</text>
+      <text class="title-text">{{ eventDesc }}</text>
     </div>
   </div>
 </template>
@@ -31,7 +29,7 @@ export default {
     const domModule = weex.requireModule('dom')
     domModule.addRule('fontFace', {
       'fontFamily': 'iconfont',
-      'src': "url('http://at.alicdn.com/t/font_933576_hjux2fbay07.ttf')"
+      'src': "url('http://at.alicdn.com/t/font_933576_ji32n9fdyki.ttf')"
     })
   },
   created () {
@@ -61,21 +59,37 @@ export default {
   }
 .wrp {
   flex-direction: column;
-  background-color: #F0F0F2;
+  background-color: #f0efe9;
 }
-.nav-bar {
+.navbar {
   height: 88px;
-  background-color: #FFF;
+  background-color: #50e3a4;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   padding-left: 20px;
   padding-right: 20px;
 }
+.navbar-title {
+  font-size: 32px;
+  color: #fff;
+}
+.navbar-icon {
+  color: #fff;
+  font-size: 36px;
+}
 .form-item {
   flex-direction: row;
-  padding-left: 20px;
-  padding-right: 20px;
-  margin-top: 40px;
+  padding-left: 30px;
+  padding-right: 30px;
+  margin-top: 30px;
+}
+.title-text {
+  font-size: 28px;
+  color: #3e434f;
+}
+.text {
+  font-size: 26px;
+  color: #3e434f;
 }
 </style>

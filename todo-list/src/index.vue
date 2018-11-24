@@ -6,7 +6,7 @@
         <text class="label">{{ event.name }}</text>
         <div class="event-btn-wrp">
           <text class="btn" @click="onFinish(event, index)">完成</text>
-          <text class="iconfont">&#xe601;</text>
+          <text class="iconfont">&#xe775;</text>
         </div>
       </div>
     </div>
@@ -15,13 +15,19 @@
       <div class="event" v-for="event in doneEvents" :key="event.name" @click="onEventClick(event)">
         <text class="label">{{ event.name }}</text>
         <div class="event-btn-wrp">
-          <text class="iconfont">&#xe601;</text>
+          <text class="iconfont">&#xe775;</text>
         </div>
       </div>
     </div>
-    <div class="bottom-btn-wrp">
-      <text class="bottom-btn" @click="onAdd">添加</text>
-      <text class="bottom-btn" @click="onClear">清空</text>
+    <div class="tabbar-wrp">
+      <div class="tabbar-item" @click="onAdd">
+        <text class="iconfont tabbar-icon">&#xe727;</text>
+        <text class="tabbar-text">添加</text>
+      </div>
+      <div class="tabbar-item" @click="onClear">
+        <text class="iconfont tabbar-icon">&#xe729;</text>
+        <text class="tabbar-text">清空</text>
+      </div>
     </div>
   </div>
 </template>
@@ -41,7 +47,7 @@ export default {
     const domModule = weex.requireModule('dom')
     domModule.addRule('fontFace', {
       'fontFamily': 'iconfont',
-      'src': "url('http://at.alicdn.com/t/font_933576_hjux2fbay07.ttf')"
+      'src': "url('http://at.alicdn.com/t/font_933576_ji32n9fdyki.ttf')"
     })
   },
   created () {
@@ -105,16 +111,22 @@ export default {
 <style scoped>
   .iconfont {
     font-family: iconfont;
+    color: #3e434f;
   }
   .wrp {
-    background-color: #f0f0f2;
+    background-color: #F0EFE9;
   }
   .title {
-    font-size: 30px;
+    font-size: 24px;
     padding-top: 20px;
     padding-bottom: 10px;
     padding-left: 20px;
     padding-right: 20px;
+    color: #3e434f;
+  }
+  .label {
+    color: #3e434f;
+    font-size: 28px;
   }
   .event {
     background-color: #fff;
@@ -130,29 +142,41 @@ export default {
     align-items: center;
   }
   .btn {
-    border-width: 2px;
     border-radius: 10px;
-    font-size: 28px;
+    font-size: 24px;
     padding-left: 18px;
     padding-right: 18px;
     padding-top: 2px;
     padding-bottom: 2px;
+    background-color: #50e3a4;
+    color: #fff;
   }
-  .bottom-btn-wrp {
+  .tabbar-wrp {
     bottom: 0px;
     left: 0px;
     position: absolute;
     width: 100%;
-    height: 100px;
+    height: 88px;
     background-color: #FFF;
     /* 主轴方向 */
     flex-direction: row;
     /* 水平方向 */
     align-items: center;
+    border-top-width: 2px;
+    border-color: #e2e2e2;
   }
-  .bottom-btn {
+  .tabbar-item {
     flex: 1;
     text-align: center;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
-
+  .tabbar-text {
+    font-size: 24px;
+    color: #3e434f;
+  }
+  .tabbar-icon {
+    font-size: 44px;
+  }
 </style>

@@ -135,42 +135,59 @@ module.exports = {
   },
   "wrp": {
     "flexDirection": "column",
-    "backgroundColor": "#F0F0F2"
+    "backgroundColor": "#f0efe9"
   },
-  "nav-bar": {
+  "navbar": {
     "height": "88",
-    "backgroundColor": "#FFFFFF",
+    "backgroundColor": "#50e3a4",
     "flexDirection": "row",
     "justifyContent": "space-between",
     "alignItems": "center",
     "paddingLeft": "20",
     "paddingRight": "20"
   },
+  "navbar-title": {
+    "fontSize": "32",
+    "color": "#ffffff"
+  },
+  "navbar-icon": {
+    "color": "#ffffff",
+    "fontSize": "36"
+  },
   "form-item": {
     "flexDirection": "row",
-    "paddingLeft": "20",
-    "paddingRight": "20",
+    "paddingLeft": "30",
+    "paddingRight": "30",
     "marginTop": "40"
   },
   "input": {
-    "flex": 1
+    "flex": 1,
+    "fontSize": "28",
+    "backgroundColor": "rgba(0,0,0,0)",
+    "color": "#3e434f"
   },
   "textarea": {
-    "flex": 1
+    "flex": 1,
+    "fontSize": "26",
+    "backgroundColor": "rgba(0,0,0,0)",
+    "color": "#3e434f"
   },
   "bottom-btn-wrp": {
-    "bottom": "0",
-    "left": "0",
+    "bottom": 2.5,
+    "left": 15,
     "position": "absolute",
-    "width": 100,
-    "height": "100",
-    "backgroundColor": "#FFFFFF",
+    "width": 70,
+    "height": "80",
+    "backgroundColor": "#50e3a4",
     "flexDirection": "row",
-    "alignItems": "center"
+    "alignItems": "center",
+    "borderRadius": "12"
   },
   "bottom-btn": {
     "flex": 1,
-    "textAlign": "center"
+    "textAlign": "center",
+    "fontSize": "28",
+    "color": "#ffffff"
   }
 }
 
@@ -184,8 +201,6 @@ module.exports = {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-//
-//
 //
 //
 //
@@ -221,7 +236,7 @@ exports.default = {
     var domModule = weex.requireModule('dom');
     domModule.addRule('fontFace', {
       'fontFamily': 'iconfont',
-      'src': "url('http://at.alicdn.com/t/font_933576_hjux2fbay07.ttf')"
+      'src': "url('http://at.alicdn.com/t/font_933576_ji32n9fdyki.ttf')"
     });
   },
 
@@ -265,19 +280,19 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   return _c('div', {
     staticClass: ["wrp"]
   }, [_c('div', {
-    staticClass: ["nav-bar"]
+    staticClass: ["navbar"]
   }, [_c('text', {
-    staticClass: ["iconfont"],
+    staticClass: ["iconfont", "navbar-icon"],
     on: {
       "click": _vm.onBack
     }
-  }, [_vm._v("")]), _c('text', {
-    staticClass: ["title"]
+  }, [_vm._v("")]), _c('text', {
+    staticClass: ["navbar-title"]
   }, [_vm._v("添加事件")]), _c('text', {
-    staticClass: ["title"]
+    staticClass: ["navbar-title"]
   })]), _c('div', {
     staticClass: ["form-item"]
-  }, [_c('text', [_vm._v("事件名称")]), _c('input', {
+  }, [_c('input', {
     staticClass: ["input"],
     attrs: {
       "type": "text",
@@ -291,7 +306,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   })]), _c('div', {
     staticClass: ["form-item"]
-  }, [_c('text', [_vm._v("事件详情")]), _c('textarea', {
+  }, [_c('textarea', {
     staticClass: ["textarea"],
     attrs: {
       "type": "text",

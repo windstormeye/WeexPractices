@@ -62,7 +62,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 10);
+/******/ 	return __webpack_require__(__webpack_require__.s = 12);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -76,13 +76,15 @@
 /* 7 */,
 /* 8 */,
 /* 9 */,
-/* 10 */
+/* 10 */,
+/* 11 */,
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _index = __webpack_require__(11);
+var _index = __webpack_require__(13);
 
 var _index2 = _interopRequireDefault(_index);
 
@@ -92,21 +94,21 @@ _index2.default.el = '#root';
 new Vue(_index2.default);
 
 /***/ }),
-/* 11 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __vue_exports__, __vue_options__
 var __vue_styles__ = []
 
 /* styles */
-__vue_styles__.push(__webpack_require__(12)
+__vue_styles__.push(__webpack_require__(14)
 )
 
 /* script */
-__vue_exports__ = __webpack_require__(13)
+__vue_exports__ = __webpack_require__(15)
 
 /* template */
-var __vue_template__ = __webpack_require__(14)
+var __vue_template__ = __webpack_require__(17)
 __vue_options__ = __vue_exports__ = __vue_exports__ || {}
 if (
   typeof __vue_exports__.default === "object" ||
@@ -136,22 +138,28 @@ module.exports = __vue_exports__
 
 
 /***/ }),
-/* 12 */
+/* 14 */
 /***/ (function(module, exports) {
 
 module.exports = {
   "iconfont": {
-    "fontFamily": "iconfont"
+    "fontFamily": "iconfont",
+    "color": "#3e434f"
   },
   "wrp": {
-    "backgroundColor": "#f0f0f2"
+    "backgroundColor": "#F0EFE9"
   },
   "title": {
-    "fontSize": "30",
+    "fontSize": "24",
     "paddingTop": "20",
     "paddingBottom": "10",
     "paddingLeft": "20",
-    "paddingRight": "20"
+    "paddingRight": "20",
+    "color": "#3e434f"
+  },
+  "label": {
+    "color": "#3e434f",
+    "fontSize": "28"
   },
   "event": {
     "backgroundColor": "#ffffff",
@@ -167,32 +175,45 @@ module.exports = {
     "alignItems": "center"
   },
   "btn": {
-    "borderWidth": "2",
     "borderRadius": "10",
-    "fontSize": "28",
+    "fontSize": "24",
     "paddingLeft": "18",
     "paddingRight": "18",
     "paddingTop": "2",
-    "paddingBottom": "2"
+    "paddingBottom": "2",
+    "backgroundColor": "#50e3a4",
+    "color": "#ffffff"
   },
-  "bottom-btn-wrp": {
+  "tabbar-wrp": {
     "bottom": "0",
     "left": "0",
     "position": "absolute",
     "width": 100,
-    "height": "100",
+    "height": "88",
     "backgroundColor": "#FFFFFF",
     "flexDirection": "row",
-    "alignItems": "center"
+    "alignItems": "center",
+    "borderTopWidth": "2",
+    "borderColor": "#e2e2e2"
   },
-  "bottom-btn": {
+  "tabbar-item": {
     "flex": 1,
-    "textAlign": "center"
+    "textAlign": "center",
+    "flexDirection": "column",
+    "alignItems": "center",
+    "justifyContent": "center"
+  },
+  "tabbar-text": {
+    "fontSize": "24",
+    "color": "#3e434f"
+  },
+  "tabbar-icon": {
+    "fontSize": "44"
   }
 }
 
 /***/ }),
-/* 13 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -202,9 +223,15 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _utils = __webpack_require__(15);
+var _utils = __webpack_require__(16);
 
 var storage = weex.requireModule('storage'); //
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -245,7 +272,7 @@ exports.default = {
     var domModule = weex.requireModule('dom');
     domModule.addRule('fontFace', {
       'fontFamily': 'iconfont',
-      'src': "url('http://at.alicdn.com/t/font_933576_hjux2fbay07.ttf')"
+      'src': "url('http://at.alicdn.com/t/font_933576_ji32n9fdyki.ttf')"
     });
   },
   created: function created() {
@@ -309,7 +336,30 @@ exports.default = {
 };
 
 /***/ }),
-/* 14 */
+/* 16 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.getEntryUrl = getEntryUrl;
+function getEntryUrl(pageName) {
+  if (weex.config.env.platform === 'Web') {
+    return './' + pageName + '.html';
+  } else {
+    var arr = weex.config.bundleUrl.split('/');
+    // 防止为 .html
+    arr.pop();
+    arr.push(pageName + '.js');
+    return arr.join('/');
+  }
+}
+
+/***/ }),
+/* 17 */
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -345,7 +395,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     }, [_vm._v("完成")]), _c('text', {
       staticClass: ["iconfont"]
-    }, [_vm._v("")])])])
+    }, [_vm._v("")])])])
   })), _c('text', {
     staticClass: ["title"]
   }, [_vm._v("已办事项")]), _c('div', {
@@ -363,49 +413,34 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticClass: ["label"]
     }, [_vm._v(_vm._s(event.name))]), _vm._m(0, true)])
   })), _c('div', {
-    staticClass: ["bottom-btn-wrp"]
-  }, [_c('text', {
-    staticClass: ["bottom-btn"],
+    staticClass: ["tabbar-wrp"]
+  }, [_c('div', {
+    staticClass: ["tabbar-item"],
     on: {
       "click": _vm.onAdd
     }
-  }, [_vm._v("添加")]), _c('text', {
-    staticClass: ["bottom-btn"],
+  }, [_c('text', {
+    staticClass: ["iconfont", "tabbar-icon"]
+  }, [_vm._v("")]), _c('text', {
+    staticClass: ["tabbar-text"]
+  }, [_vm._v("添加")])]), _c('div', {
+    staticClass: ["tabbar-item"],
     on: {
       "click": _vm.onClear
     }
-  }, [_vm._v("清空")])])])
+  }, [_c('text', {
+    staticClass: ["iconfont", "tabbar-icon"]
+  }, [_vm._v("")]), _c('text', {
+    staticClass: ["tabbar-text"]
+  }, [_vm._v("清空")])])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: ["event-btn-wrp"]
   }, [_c('text', {
     staticClass: ["iconfont"]
-  }, [_vm._v("")])])
+  }, [_vm._v("")])])
 }]}
 module.exports.render._withStripped = true
-
-/***/ }),
-/* 15 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.getEntryUrl = getEntryUrl;
-function getEntryUrl(pageName) {
-  if (weex.config.env.platform === 'Web') {
-    return './' + pageName + '.html';
-  } else {
-    var arr = weex.config.bundleUrl.split('/');
-    // 防止为 .html
-    arr.pop();
-    arr.push(pageName + '.js');
-    return arr.join('/');
-  }
-}
 
 /***/ })
 /******/ ]);

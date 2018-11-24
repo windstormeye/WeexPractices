@@ -62,34 +62,33 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 5);
 /******/ })
 /************************************************************************/
-/******/ ([
-/* 0 */
+/******/ ({
+
+/***/ 5:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _HelloWorld = __webpack_require__(1);
+var _navbar = __webpack_require__(6);
 
-var _HelloWorld2 = _interopRequireDefault(_HelloWorld);
+var _navbar2 = _interopRequireDefault(_navbar);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-_HelloWorld2.default.el = '#root';
-new Vue(_HelloWorld2.default);
+_navbar2.default.el = '#root';
+new Vue(_navbar2.default);
 
 /***/ }),
-/* 1 */
-/***/ (function(module, exports, __webpack_require__) {
+
+/***/ 6:
+/***/ (function(module, exports) {
 
 var __vue_exports__, __vue_options__
 var __vue_styles__ = []
-
-/* template */
-var __vue_template__ = __webpack_require__(2)
 __vue_options__ = __vue_exports__ = __vue_exports__ || {}
 if (
   typeof __vue_exports__.default === "object" ||
@@ -101,9 +100,7 @@ __vue_options__ = __vue_exports__ = __vue_exports__.default
 if (typeof __vue_options__ === "function") {
   __vue_options__ = __vue_options__.options
 }
-__vue_options__.__file = "/Users/pjhubs/Documents/project/case/Weex/todo-list/src/components/HelloWorld.vue"
-__vue_options__.render = __vue_template__.render
-__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
+__vue_options__.__file = "/Users/pjhubs/Documents/project/case/Weex/todo-list/src/components/navbar.vue"
 __vue_options__.style = __vue_options__.style || {}
 __vue_styles__.forEach(function (module) {
   for (var name in module) {
@@ -117,16 +114,6 @@ if (typeof __register_static_styles__ === "function") {
 module.exports = __vue_exports__
 
 
-/***/ }),
-/* 2 */
-/***/ (function(module, exports) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('text', {
-    staticClass: ["message"]
-  }, [_vm._v("Now, let's use Vue.js to build your Weex app.")])
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-
 /***/ })
-/******/ ]);
+
+/******/ });
